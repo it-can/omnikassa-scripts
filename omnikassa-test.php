@@ -13,10 +13,9 @@ $omschrijving 	= '123456';
 $key_version 	= '1';
 $secretKey		= '002020000000001_KEY1';
 
-$Data = utf8_encode('amount='.$bedrag.'|currencyCode=978|merchantId='.$merchantId.'|normalReturnUrl='.$return_url.'|transactionReference='.$omschrijving.'|keyVersion='.$key_version);
-$secretKey = utf8_encode($secretKey);
-
-$Seal = hash('sha256', $Data.$secretKey);
+// Maken van datastring voor OmniKassa
+$Data = 'amount='.$bedrag.'|currencyCode=978|merchantId='.$merchantId.'|normalReturnUrl='.$return_url.'|transactionReference='.$omschrijving.'|keyVersion='.$key_version;
+$Seal = hash('sha256', utf8_encode($Data.$secretKey));
 ?>
 
 <html>
