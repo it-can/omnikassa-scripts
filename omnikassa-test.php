@@ -1,7 +1,10 @@
 <?php
+/*
+* Een script om betalingen mee te testen.
+*/
+
 $test_mode = TRUE;
 $Action = ($test_mode) ? 'https://payment-webinit.simu.omnikassa.rabobank.nl/paymentServlet' : 'https://payment-webinit.omnikassa.rabobank.nl/paymentServlet';
-
 
 $bedrag 		= 100;  // 100 = 1,00 euro
 $merchantId 	= '002020000000001';
@@ -10,18 +13,17 @@ $omschrijving 	= '123456';
 $key_version 	= '1';
 $secretKey		= '002020000000001_KEY1';
 
-
 $Data = utf8_encode('amount='.$bedrag.'|currencyCode=978|merchantId='.$merchantId.'|normalReturnUrl='.$return_url.'|transactionReference='.$omschrijving.'|keyVersion='.$key_version);
 $secretKey = utf8_encode($secretKey);
 
 $Seal = hash('sha256', $Data.$secretKey);
-
-echo($Data);
-echo('<br>');
-echo($Seal);
 ?>
+
 <html>
 <body>
+DATA: <?php echo($Data); ?>
+<br /><br />
+SEAL: <?php echo($Seal); ?>
 <form method="POST" action="<?php echo $Action ?>">
 <input type="hidden" name="Data" value="<?php echo $Data ?>">
 <input type="hidden" name="InterfaceVersion" value="HP_1.0">
