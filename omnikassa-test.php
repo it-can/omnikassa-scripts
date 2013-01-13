@@ -1,6 +1,7 @@
 <?php
 /*
 * Een script om betalingen mee te testen.
+* USE AT YOUR OWN RISK!
 */
 
 $test_mode = TRUE;
